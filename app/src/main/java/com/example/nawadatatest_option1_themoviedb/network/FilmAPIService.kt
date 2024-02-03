@@ -3,6 +3,8 @@ package com.example.nawadatatest_option1_themoviedb.network
 import com.example.nawadatatest_option1_themoviedb.model.Detail
 import com.example.nawadatatest_option1_themoviedb.model.Genres
 import com.example.nawadatatest_option1_themoviedb.model.Movie
+import com.example.nawadatatest_option1_themoviedb.model.Reviews
+import com.example.nawadatatest_option1_themoviedb.model.Video
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,5 +26,17 @@ interface FilmAPIService {
     fun getMovieDetail(
         @Path("movieId") movieId:Int,
     ): Call<Detail>
+
+    @GET("movie/{movieId}/reviews?api_key=ca0d93ea30b7015390f9ae8d859f6863")
+    fun getReviewsMovie(
+        @Path("movieId") movieId: Int,
+    ): Call<Reviews>
+
+    @GET("movie/{movieId}/videos?api_key=ca0d93ea30b7015390f9ae8d859f6863")
+    fun getVideo(
+        @Path("movieId") movieId: Int,
+    ): Call<Video>
+
+
 
 }

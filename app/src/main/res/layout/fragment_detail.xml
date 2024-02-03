@@ -1,45 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.DetailFragment"
-    android:padding="40dp">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/judulDetail"
-        android:text="Judul"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:layout_marginTop="30dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        tools:context=".view.DetailFragment">
 
-    <ImageView
-        android:id="@+id/imageDetail"
-        android:layout_width="150dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/judulDetail"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <WebView
+            android:id="@+id/webViewSaya"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="WebViewLayout" />
 
-    <TextView
-        android:id="@+id/textDetail"
-        android:text="djfnsflksnsanvadiviio"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageDetail"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:id="@+id/judulDetail"
+            android:text="Judul"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/webViewSaya" />
 
+        <ImageView
+            android:id="@+id/imageDetail"
+            android:layout_width="150dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/judulDetail" />
 
+        <TextView
+            android:id="@+id/textDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="djfnsflksnsanvadiviio"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageDetail"
+            app:layout_constraintTop_toBottomOf="@id/judulDetail"
+            tools:ignore="TextSizeCheck" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/judulReviews"
+            android:text="Reviews"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageDetail" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_movie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/judulReviews"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_reviews"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
