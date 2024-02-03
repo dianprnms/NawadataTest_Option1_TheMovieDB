@@ -28,7 +28,7 @@ class MovieFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,7 +36,7 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        nowPlayingViewModel = ViewModelProvider(this).get(NowPlayingViewModel::class.java)
+        nowPlayingViewModel = ViewModelProvider(this)[NowPlayingViewModel::class.java]
         nowPlayingAdapter = NowPlayingAdapter(emptyList()) // Initialize with an empty list
 
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -52,11 +52,11 @@ class MovieFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        nowPlayingViewModel.getNowPlayingData().observe(viewLifecycleOwner, { movies ->
+        nowPlayingViewModel.getNowPlayingData().observe(viewLifecycleOwner) { movies ->
             movies?.let {
                 nowPlayingAdapter.updateResult(it)
             }
-        })
+        }
 
         nowPlayingAdapter.onClick = { selectedMovie ->
             val bundle = Bundle().apply {

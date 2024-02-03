@@ -1,22 +1,21 @@
 package com.example.nawadatatest_option1_themoviedb.adapter
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nawadatatest_option1_themoviedb.databinding.ItemMovieBinding
-import com.example.nawadatatest_option1_themoviedb.model.Genre
 import com.example.nawadatatest_option1_themoviedb.model.ResultX
 
-class NowPlayingAdapter (var listMovieNowPlaying: List<ResultX>): RecyclerView.Adapter<NowPlayingAdapter.ViewHolder>()  {
+class NowPlayingAdapter (private var listMovieNowPlaying: List<ResultX>): RecyclerView.Adapter<NowPlayingAdapter.ViewHolder>()  {
     var onClick : ((ResultX)->Unit)? = null
 
     class ViewHolder (var binding: ItemMovieBinding): RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var view = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
 
@@ -37,6 +36,7 @@ class NowPlayingAdapter (var listMovieNowPlaying: List<ResultX>): RecyclerView.A
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateResult(newResultX: List<ResultX>) {
         listMovieNowPlaying = newResultX
         notifyDataSetChanged()

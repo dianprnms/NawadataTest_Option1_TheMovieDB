@@ -14,9 +14,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitClient {
-    const val BASE_URL = "https://api.themoviedb.org/3/"
-    const val API_KEY_HEADER = "Authorization"
-    const val API_KEY = "ca0d93ea30b7015390f9ae8d859f6863"
+    private const val BASE_URL = "https://api.themoviedb.org/3/"
+    private const val API_KEY = "ca0d93ea30b7015390f9ae8d859f6863"
 
     private val logging: HttpLoggingInterceptor
         get() {

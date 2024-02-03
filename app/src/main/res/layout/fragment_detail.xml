@@ -11,6 +11,21 @@
         android:layout_height="wrap_content"
         tools:context=".view.DetailFragment">
 
+        <TextView
+            android:id="@+id/tdk_ada_video"
+            android:text="Oops tidak ada video!!"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="invisible" />
+
         <WebView
             android:id="@+id/webViewSaya"
             android:layout_width="match_parent"
@@ -82,5 +97,21 @@
             app:layout_constraintTop_toBottomOf="@id/judulReviews"
             app:layout_constraintEnd_toEndOf="parent"
             tools:listitem="@layout/item_reviews"/>
+
+        <TextView
+            android:id="@+id/tidak_ada_review"
+            android:text="Oops tidak ada review nih!"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/judulReviews"
+            android:visibility="invisible"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

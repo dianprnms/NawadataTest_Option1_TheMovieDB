@@ -16,7 +16,7 @@ class NowPlayingViewModel @Inject constructor(private val filmAPIService: FilmAP
 
     private val TAG = "NowPlayingViewModel"
 
-    var liveNowPlayingData: MutableLiveData<List<ResultX>?> = MutableLiveData()
+    private var liveNowPlayingData: MutableLiveData<List<ResultX>?> = MutableLiveData()
 
     fun getNowPlayingData(): MutableLiveData<List<ResultX>?> {
         return liveNowPlayingData

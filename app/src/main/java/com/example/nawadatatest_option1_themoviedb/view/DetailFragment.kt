@@ -1,5 +1,6 @@
 package com.example.nawadatatest_option1_themoviedb.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,10 +46,10 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        reviewsViewModel = ViewModelProvider(this).get(ReviewsViewModel::class.java)
+        detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
+        reviewsViewModel = ViewModelProvider(this)[ReviewsViewModel::class.java]
         reviewsAdapter = ReviewsAdapter(emptyList())
-        videoViewModel = ViewModelProvider(this).get(VideoViewModel::class.java)
+        videoViewModel = ViewModelProvider(this)[VideoViewModel::class.java]
 
 
         val movieId = arguments?.getInt("movieId", -1)
@@ -79,17 +80,15 @@ class DetailFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        detailViewModel.detailData.observe(viewLifecycleOwner, { detail ->
+        detailViewModel.detailData.observe(viewLifecycleOwner) { detail ->
             if (detail != null) {
                 binding.judulDetail.text = detail.title
                 binding.textDetail.text = detail.overview
                 Glide.with(this)
                     .load("https://image.tmdb.org/t/p/w500${detail.posterPath}")
                     .into(binding.imageDetail)
-            } else {
-                // Handle error or empty response
             }
-        })
+        }
     }
 
     private fun fetchReviews(movieId: Int) {
@@ -100,13 +99,21 @@ class DetailFragment : Fragment() {
     }
 
     private fun observeReviewsViewModel() {
-        reviewsViewModel.reviewsData.observe(viewLifecycleOwner, { reviews ->
+        reviewsViewModel.reviewsData.observe(viewLifecycleOwner) { reviews ->
             reviews?.let {
                 Log.d("DetailFragment", "Received reviews: $reviews")
-                reviewsAdapter.updateReviews(it.results.orEmpty())
+                if (it.results.isNullOrEmpty()) {
+                    binding.tidakAdaReview.visibility = View.VISIBLE
+                    binding.rvMovie.visibility = View.GONE
+                } else {
+                    binding.tidakAdaReview.visibility = View.GONE
+                    binding.rvMovie.visibility = View.VISIBLE
+                    reviewsAdapter.updateReviews(it.results)
+                }
             }
-        })
+        }
     }
+
 
     private fun fetchVideo(movieId: Int) {
         lifecycleScope.launch(Dispatchers.Main) {
@@ -115,18 +122,22 @@ class DetailFragment : Fragment() {
     }
 
     private fun observeVideoViewModel() {
-        videoViewModel.videoData.observe(viewLifecycleOwner, { videoResults ->
+        videoViewModel.videoData.observe(viewLifecycleOwner) { videoResults ->
             videoResults?.let {
                 if (it.isNotEmpty()) {
                     videoKey = it[0].key
                     loadYouTubeVideo()
+                    binding.tdkAdaVideo.visibility = View.GONE
+                    binding.webViewSaya.visibility = View.VISIBLE
                 } else {
-                    // Handle empty video response
+                    binding.tdkAdaVideo.visibility = View.VISIBLE
+                    binding.webViewSaya.visibility = View.GONE
                 }
             }
-        })
+        }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun loadYouTubeVideo() {
         val youtubeVideoUrl = "https://www.youtube.com/embed/$videoKey"
         binding.webViewSaya.settings.javaScriptEnabled = true

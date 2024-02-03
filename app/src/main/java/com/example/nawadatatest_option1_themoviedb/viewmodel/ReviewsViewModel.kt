@@ -15,7 +15,10 @@ class ReviewsViewModel @Inject constructor(private val filmAPIService: FilmAPISe
 
     private val _reviewsData = MutableLiveData<Reviews?>()
     val reviewsData: MutableLiveData<Reviews?>
-        get() = _reviewsData
+        get() {
+            val _reviewsData1 = _reviewsData
+            return _reviewsData1
+        }
 
     suspend fun getReviews(movieId: Int) {
         withContext(Dispatchers.IO) {

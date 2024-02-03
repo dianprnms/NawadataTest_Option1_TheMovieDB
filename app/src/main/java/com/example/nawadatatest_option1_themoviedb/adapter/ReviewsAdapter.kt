@@ -1,5 +1,6 @@
 package com.example.nawadatatest_option1_themoviedb.adapter
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class ReviewsAdapter(private var listReviews: List<ResultXX>) :
         holder.binding.review.text = review.content
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateReviews(newList: List<ResultXX>) {
         listReviews = newList
         notifyDataSetChanged()

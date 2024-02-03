@@ -4,12 +4,10 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.nawadatatest_option1_themoviedb.model.Genre
-import com.example.nawadatatest_option1_themoviedb.model.Genres
 import com.example.nawadatatest_option1_themoviedb.network.FilmAPIService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -17,9 +15,7 @@ class GenreViewModel @Inject constructor(private val filmAPIService: FilmAPIServ
 
     private val TAG = "GenreViewModel"
 
-    var liveGenreData: MutableLiveData<List<Genre>?> = MutableLiveData()
-
-    private var selectedGenreId: Int? = null
+    private var liveGenreData: MutableLiveData<List<Genre>?> = MutableLiveData()
 
     fun getGenreData(): MutableLiveData<List<Genre>?> {
         return liveGenreData
@@ -43,14 +39,4 @@ class GenreViewModel @Inject constructor(private val filmAPIService: FilmAPIServ
         }
     }
 
-    private val selectedGenreIdLiveData: MutableLiveData<Int?> = MutableLiveData()
-
-    fun setSelectedGenreId(genreId: Int) {
-        selectedGenreId = genreId
-        selectedGenreIdLiveData.value = genreId
-    }
-
-    fun observeSelectedGenreId(): MutableLiveData<Int?> {
-        return selectedGenreIdLiveData
-    }
 }

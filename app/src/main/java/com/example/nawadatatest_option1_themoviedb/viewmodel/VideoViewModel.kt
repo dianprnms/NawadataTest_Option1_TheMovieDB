@@ -25,13 +25,11 @@ class VideoViewModel @Inject constructor(private val filmAPIService: FilmAPIServ
                         _videoData.postValue(response.body()?.results)
                     }
                 } else {
-                    // Log error or handle accordingly
                     withContext(Dispatchers.Main) {
                         _videoData.postValue(null)
                     }
                 }
             } catch (e: Exception) {
-                // Log error or handle accordingly
                 withContext(Dispatchers.Main) {
                     _videoData.postValue(null)
                 }

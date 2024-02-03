@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nawadatatest_option1_themoviedb.R
@@ -38,7 +37,7 @@ class Genre : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        genreViewModel = ViewModelProvider(this).get(GenreViewModel::class.java)
+        genreViewModel = ViewModelProvider(this)[GenreViewModel::class.java]
         genreAdapter = GenreAdapter(emptyList()) // Initialize with an empty list
 
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -50,11 +49,11 @@ class Genre : Fragment() {
     }
 
     private fun observeViewModel() {
-        genreViewModel.getGenreData().observe(viewLifecycleOwner, { genres ->
+        genreViewModel.getGenreData().observe(viewLifecycleOwner) { genres ->
             genres?.let {
                 genreAdapter.updateGenres(it)
             }
-        })
+        }
 
         genreAdapter.onClick = { selectedGenre ->
             val bundle = Bundle().apply {
