@@ -26,7 +26,6 @@ object RetrofitClient {
             }
         }
 
-    // Tambahkan Interceptor untuk menambahkan API key pada setiap permintaan
     private val apiKeyInterceptor = Interceptor { chain ->
         val original = chain.request()
         val originalHttpUrl = original.url

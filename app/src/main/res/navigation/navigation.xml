@@ -9,5 +9,23 @@
         android:id="@+id/genre"
         android:name="com.example.nawadatatest_option1_themoviedb.view.Genre"
         android:label="fragment_genre"
-        tools:layout="@layout/fragment_genre" />
+        tools:layout="@layout/fragment_genre" >
+        <action
+            android:id="@+id/action_genre_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.nawadatatest_option1_themoviedb.view.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" >
+        <action
+            android:id="@+id/action_movieFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.nawadatatest_option1_themoviedb.view.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>

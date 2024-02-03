@@ -1,12 +1,16 @@
 package com.example.nawadatatest_option1_themoviedb.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.nawadatatest_option1_themoviedb.databinding.ItemMovieBinding
+import com.example.nawadatatest_option1_themoviedb.model.Genre
 import com.example.nawadatatest_option1_themoviedb.model.ResultX
 
 class NowPlayingAdapter (var listMovieNowPlaying: List<ResultX>): RecyclerView.Adapter<NowPlayingAdapter.ViewHolder>()  {
+    var onClick : ((ResultX)->Unit)? = null
 
     class ViewHolder (var binding: ItemMovieBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -22,6 +26,15 @@ class NowPlayingAdapter (var listMovieNowPlaying: List<ResultX>): RecyclerView.A
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.judulFilm.text = listMovieNowPlaying[position].title
+        holder.binding.tglFilm.text = listMovieNowPlaying[position].releaseDate
+        Glide.with(holder.itemView.context)
+            .load("https://image.tmdb.org/t/p/w500${listMovieNowPlaying[position].posterPath}")
+            .into(holder.binding.imgHome)
+
+        holder.binding.cvItemMovie.setOnClickListener {
+            onClick!!.invoke(listMovieNowPlaying[position])
+        }
+
     }
 
     fun updateResult(newResultX: List<ResultX>) {
